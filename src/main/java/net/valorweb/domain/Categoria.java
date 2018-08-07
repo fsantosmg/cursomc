@@ -16,6 +16,16 @@ public class Categoria implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public Categoria() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Categoria(Integer id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
