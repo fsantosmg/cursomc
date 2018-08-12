@@ -4,14 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import javax.persistence.OneToMany;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,8 +21,9 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Categoria implements Serializable {
-
+public class Estado implements Serializable {
+	
+	
 	/**
 	 * 
 	 */
@@ -36,17 +34,15 @@ public class Categoria implements Serializable {
 	@Getter
 	@Setter
 	private Integer id;
-
-	@Column
+	
 	@NonNull
 	@Getter
 	@Setter
 	private String nome;
-
+	
 	@Getter
 	@Setter
-	@JsonManagedReference
-	@ManyToMany(mappedBy="categorias")
-	private List<Produto> produtos = new ArrayList<>();
+	@OneToMany(mappedBy="estado")
+	private List<Cidade> cidades = new ArrayList<>();
 
 }
