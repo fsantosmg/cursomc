@@ -26,10 +26,10 @@ public enum TipoCliente {
 			return null;
 		}
 
-		for (TipoCliente enumTipoCli : TipoCliente.values()) {
-			if (cod.equals(enumTipoCli.getCod())) {
+		for (TipoCliente tipoCliente : TipoCliente.values()) {
+			if (cod.equals(tipoCliente.getCod())) {
 
-				return enumTipoCli;
+				return tipoCliente;
 
 			}
 
