@@ -18,7 +18,6 @@ import net.valorweb.domain.enums.EstadoPagamento;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public abstract class Pagamento implements Serializable {

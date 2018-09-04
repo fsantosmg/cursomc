@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.EqualsAndHashCode;
@@ -67,6 +68,7 @@ public class Pedido implements Serializable {
 	
 	@Getter
 	@Setter
-	private Set<ItemPedidoPK> itens = new HashSet<>();
+	@OneToMany(mappedBy="id.pedido")
+	private Set<ItemPedido> itens = new HashSet<>();
 
 }
