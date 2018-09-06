@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,10 +30,12 @@ public class PagamentoComBoleto extends Pagamento {
 
 	@Getter
 	@Setter
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataVencimento;
 
 	@Getter
 	@Setter
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataPagamento;
 	
 	
