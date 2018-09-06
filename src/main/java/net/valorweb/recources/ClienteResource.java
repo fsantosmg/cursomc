@@ -19,16 +19,11 @@ public class ClienteResource {
 	@Autowired
 	ClienteService service;
 
-	@GetMapping
-	public List<Cliente> listar(){
-	
-		return null;
-	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> buscaPorId(@PathVariable Integer id) {
+	public ResponseEntity<Cliente> findPorId(@PathVariable Integer id) {
 		
-		return ResponseEntity.ok().body(service.buscar(id));
+		return ResponseEntity.ok().body(service.findById(id));
 		
 	}
 	
