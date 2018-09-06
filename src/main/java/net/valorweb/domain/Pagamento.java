@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -48,7 +48,7 @@ public abstract class Pagamento implements Serializable {
 	@MapsId
 	@Getter
 	@Setter
-	@JsonBackReference
+	@JsonIgnore
 	private Pedido pedido;
 
 	public EstadoPagamento getEstadoPagamento() {

@@ -14,8 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -76,7 +75,6 @@ public class Cliente implements Serializable {
 	@Getter
 	@Setter
 	@OneToMany(mappedBy="cliente")
-	@JsonManagedReference
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@Getter
@@ -87,7 +85,7 @@ public class Cliente implements Serializable {
 	
 	@Getter
 	@Setter
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 
