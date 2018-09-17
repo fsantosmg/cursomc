@@ -22,12 +22,18 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
+
 public class Categoria implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	public Categoria(Integer id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,9 +49,7 @@ public class Categoria implements Serializable {
 
 	@Getter
 	@Setter
-	@ManyToMany(mappedBy="categorias")
+	@ManyToMany(mappedBy = "categorias")
 	private List<Produto> produtos = new ArrayList<>();
-
-
 
 }

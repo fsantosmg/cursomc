@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import net.valorweb.domain.Categoria;
+import net.valorweb.dto.CategoriaDTO;
 import net.valorweb.repositories.CategoriaRepository;
 import net.valorweb.services.exception.DataIntegrityException;
 import net.valorweb.services.exception.ObjectNotFoundException;
@@ -53,11 +54,15 @@ public class CategoriaService {
 		return repository.findAll();
 	}
 
-	@SuppressWarnings("unchecked")
+
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 
 		return repository.findAll(PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
 
+	}
+
+	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+		return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
 	}
 
 }
