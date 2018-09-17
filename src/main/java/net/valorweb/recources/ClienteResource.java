@@ -13,18 +13,24 @@ import net.valorweb.domain.Cliente;
 import net.valorweb.services.ClienteService;
 
 @RestController
-@RequestMapping(value="clientes")
+@RequestMapping(value = "clientes")
 public class ClienteResource {
-	
+
 	@Autowired
 	ClienteService service;
 
-	
+	@GetMapping
+	public ResponseEntity<List<Cliente>> listAll() {
+
+		return ResponseEntity.ok().body(service.findAll());
+
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> findPorId(@PathVariable Integer id) {
-		
+
 		return ResponseEntity.ok().body(service.findById(id));
-		
+
 	}
-	
+
 }
