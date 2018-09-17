@@ -2,14 +2,15 @@ package net.valorweb.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import net.valorweb.domain.Categoria;
-import net.valorweb.dto.CategoriaDTO;
 import net.valorweb.repositories.CategoriaRepository;
 import net.valorweb.services.exception.DataIntegrityException;
 import net.valorweb.services.exception.ObjectNotFoundException;
@@ -50,6 +51,13 @@ public class CategoriaService {
 	public List<Categoria> findAll() {
 
 		return repository.findAll();
+	}
+
+	@SuppressWarnings("unchecked")
+	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+
+		return repository.findAll(PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
+
 	}
 
 }
