@@ -22,6 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import net.valorweb.domain.Cliente;
 import net.valorweb.domain.Cliente;
 import net.valorweb.dto.ClienteDTO;
+import net.valorweb.dto.ClienteNewDTO;
 import net.valorweb.services.ClienteService;
 
 @RestController
@@ -46,7 +47,7 @@ public class ClienteResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO clienteDTO) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO clienteDTO) {
 
 		Cliente cliente = service.fromDTO(clienteDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
