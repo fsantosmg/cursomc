@@ -35,8 +35,13 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria categoria) {
-		find(categoria.getId());
+		Categoria categoriaDb = find(categoria.getId());
+		updateData(categoria, categoriaDb);
 		return repository.save(categoria);
+	}
+
+	private void updateData(Categoria categoria, Categoria categoriaDb) {
+		categoriaDb.setNome(categoria.getNome());
 	}
 
 	public void delete(Integer id) {
@@ -53,7 +58,6 @@ public class CategoriaService {
 
 		return repository.findAll();
 	}
-
 
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 
