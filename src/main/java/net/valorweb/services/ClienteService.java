@@ -20,6 +20,7 @@ import net.valorweb.dto.ClienteDTO;
 import net.valorweb.dto.ClienteNewDTO;
 import net.valorweb.repositories.CidadeRepository;
 import net.valorweb.repositories.ClienteRepository;
+import net.valorweb.repositories.EnderecoRepository;
 import net.valorweb.services.exception.DataIntegrityException;
 import net.valorweb.services.exception.ObjectNotFoundException;
 
@@ -31,6 +32,9 @@ public class ClienteService {
 
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public Cliente findById(Integer id) {
 		Optional<Cliente> cliente = repository.findById(id);
@@ -53,7 +57,10 @@ public class ClienteService {
 	public Cliente insert(Cliente cliente) {
 
 		cliente.setId(null);
-		return repository.save(cliente);
+		cliente=repository.save(cliente);
+		enderecoRepository.saveAll(cliente.getEnderecos());
+		
+		return cliente;
 	}
 
 	public Cliente update(Cliente cliente) {
