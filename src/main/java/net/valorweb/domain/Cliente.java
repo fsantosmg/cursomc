@@ -29,17 +29,16 @@ import net.valorweb.domain.enums.TipoCliente;
 @EqualsAndHashCode(of = "id")
 public class Cliente implements Serializable {
 
-	public Cliente( String nome, String email, String cpfCnpj, TipoCliente tipo) {
+	public Cliente(String nome, String email, String cpfCnpj, TipoCliente tipo) {
 		super();
-		
+
 		this.nome = nome;
 		this.email = email;
 		this.cpfCnpj = cpfCnpj;
-		this.tipo = (tipo==null)?null : tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
 	private static final long serialVersionUID = 1L;
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,22 +46,18 @@ public class Cliente implements Serializable {
 	@Setter
 	private Integer id;
 
-	@NonNull
 	@Getter
 	@Setter
 	private String nome;
 
-	@NonNull
 	@Getter
 	@Setter
 	private String email;
 
-	@NonNull
 	@Getter
 	@Setter
 	private String cpfCnpj;
 
-	@NonNull
 	private Integer tipo;
 
 	public TipoCliente getTipo() {
@@ -75,19 +70,19 @@ public class Cliente implements Serializable {
 
 	@Getter
 	@Setter
-	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@Getter
 	@Setter
 	@ElementCollection
-	@CollectionTable(name="TELEFONE")
+	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
-	
+
 	@Getter
 	@Setter
 	@JsonIgnore
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 
 }
