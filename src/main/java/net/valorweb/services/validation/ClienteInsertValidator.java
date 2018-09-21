@@ -6,13 +6,20 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import net.valorweb.domain.Cliente;
 import net.valorweb.domain.enums.TipoCliente;
 import net.valorweb.dto.ClienteNewDTO;
 import net.valorweb.recources.exceptions.FieldMessage;
+import net.valorweb.repositories.ClienteRepository;
 import net.valorweb.services.validation.utils.CpfCnpj;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
 	@Override
 	public void initialize(ClienteInsert clienteInsert) {
 	}
@@ -30,6 +37,11 @@ public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert
 		if(clienteNewDTO.getTipo().equals(TipoCliente.PESSOAJURIDICA.getCod()) && !CpfCnpj.isValidCNPJ(clienteNewDTO.getCpfCnpj()))
 		{
 			list.add(new FieldMessage("cpfCnpj", "CNPJ inválido"));
+		}
+		
+		Cliente cliente =  clienteRepository.findByEmail(clienteNewDTO.getEmail());
+		if(cliente!=null) {
+			list.add(new FieldMessage("email", "E-mail já cadastrado"));
 		}
 		
 		for (FieldMessage e : list) {
