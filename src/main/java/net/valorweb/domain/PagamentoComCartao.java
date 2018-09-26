@@ -2,15 +2,16 @@ package net.valorweb.domain;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import lombok.Getter;
 import lombok.Setter;
 import net.valorweb.domain.enums.EstadoPagamento;
 
 @Entity
-public class PagamentoComCartao  extends Pagamento{
-	
-	
-	
+@JsonTypeName("pagamentoComCartao")
+public class PagamentoComCartao extends Pagamento {
+
 	/**
 	 * 
 	 */
@@ -18,7 +19,7 @@ public class PagamentoComCartao  extends Pagamento{
 
 	public PagamentoComCartao() {
 		super();
-		
+
 	}
 
 	public PagamentoComCartao(EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {
