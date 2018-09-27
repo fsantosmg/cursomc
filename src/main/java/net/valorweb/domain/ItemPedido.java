@@ -1,15 +1,19 @@
 package net.valorweb.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.ToString;
+
 @Entity
-public class ItemPedido implements Serializable{
-	
+public class ItemPedido implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -18,15 +22,15 @@ public class ItemPedido implements Serializable{
 	@EmbeddedId
 	@JsonIgnore
 	private ItemPedidoPK id = new ItemPedidoPK();
-	
+
 	private Double desconto;
 	private Integer quantidade;
-	private  Double preco;
-	
+	private Double preco;
+
 	public ItemPedido() {
-		
+
 	}
-	
+
 	public ItemPedido(Pedido pedido, Produto produto, Double desconto, Integer quantidade, Double preco) {
 		super();
 		this.id.setPedido(pedido);
@@ -35,10 +39,9 @@ public class ItemPedido implements Serializable{
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
-	
-	
+
 	public Double getSubtotal() {
-		return(this.preco - this.desconto) * this.quantidade;
+		return (this.preco - this.desconto) * this.quantidade;
 	}
 
 	public ItemPedidoPK getId() {
@@ -72,28 +75,40 @@ public class ItemPedido implements Serializable{
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-	
+
 	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
-	
+
 	public void setPedido(Pedido pedido) {
 		id.setPedido(pedido);
 	}
-	
-	
+
 	public Produto getProduto() {
 		return id.getProduto();
 	}
-	
+
 	public void setProduto(Produto produto) {
 		id.setProduto(produto);
 	}
-	
 
-	
-	
+	@Override
+	public String toString() {
+
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNome());
+		builder.append(", Qte: ");
+		builder.append(quantidade);
+		builder.append(", Preço unitário: ");
+		builder.append(nf.format(preco));
+		builder.append(", Subtotal: ");
+		builder.append(nf.format(getSubtotal()));
+		builder.append("\n");
+		return builder.toString();
+	}
 
 	@Override
 	public int hashCode() {
@@ -119,7 +134,5 @@ public class ItemPedido implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
 
 }

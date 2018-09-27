@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.valorweb.domain.Cliente;
 import net.valorweb.domain.ItemPedido;
 import net.valorweb.domain.PagamentoComBoleto;
 import net.valorweb.domain.Pedido;
@@ -33,6 +34,9 @@ public class PedidoService {
 	
 	@Autowired
 	private ProdutoService produtoService;
+	
+	@Autowired
+	private ClienteService clienteService;
 
 	public Pedido findById(Integer id) {
 		Optional<Pedido> pedido = repository.findById(id);
@@ -43,6 +47,7 @@ public class PedidoService {
 	@Transactional
 	public Pedido insert( Pedido pedido) {
 		pedido.setId(null);
+		pedido.setCliente(clienteService.find(pedido.getCliente().getId()));
 		pedido.setInstante(new Date());
 		pedido.getPagamento().setEstadoPagamento(EstadoPagamento.PENDENTE);
 		pedido.getPagamento().setPedido(pedido);
@@ -57,10 +62,13 @@ public class PedidoService {
 		
 		for (ItemPedido itemPedido : pedido.getItens()) {
 			itemPedido.setDesconto(0.0);
-			itemPedido.setPreco(produtoService.findById(itemPedido.getProduto().getId()).getPreco());
+			itemPedido.setProduto(produtoService.findById(itemPedido.getProduto().getId()));
+			itemPedido.setPreco(itemPedido.getProduto().getPreco());
 			itemPedido.setPedido(pedido);
 		}
 		itemPedidoRepository.saveAll(pedido.getItens());
+		
+		System.out.println(pedido);
 		return pedido;
 	}
 
