@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.valorweb.domain.Cliente;
 import net.valorweb.domain.ItemPedido;
 import net.valorweb.domain.PagamentoComBoleto;
 import net.valorweb.domain.Pedido;
@@ -37,6 +36,9 @@ public class PedidoService {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	public Pedido findById(Integer id) {
 		Optional<Pedido> pedido = repository.findById(id);
@@ -68,7 +70,7 @@ public class PedidoService {
 		}
 		itemPedidoRepository.saveAll(pedido.getItens());
 		
-		System.out.println(pedido);
+		emailService.sendOrderConfirmationEmail(pedido);
 		return pedido;
 	}
 
