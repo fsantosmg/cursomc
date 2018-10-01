@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,15 +22,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
+import net.valorweb.domain.enums.Perfil;
 import net.valorweb.domain.enums.TipoCliente;
 
 @Entity
-@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Cliente implements Serializable {
+	
+	public Cliente() {
+		addPerfil(Perfil.CLIENTE);
+	}
 
 	public Cliente(String nome, String email, String cpfCnpj, TipoCliente tipo, String senha) {
 		super();
@@ -38,6 +42,7 @@ public class Cliente implements Serializable {
 		this.cpfCnpj = cpfCnpj;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 		this.senha = senha;
+		addPerfil(Perfil.CLIENTE);
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -87,10 +92,22 @@ public class Cliente implements Serializable {
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+
 	@Getter
 	@Setter
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
+
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(perfil -> Perfil.toEnum(perfil)).collect(Collectors.toSet());
+	}
+	
+	public void addPerfil( Perfil perfil) {
+		perfis.add(perfil.getCod());
+	}
 
 }

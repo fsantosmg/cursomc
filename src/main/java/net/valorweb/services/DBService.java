@@ -20,6 +20,7 @@ import net.valorweb.domain.PagamentoComCartao;
 import net.valorweb.domain.Pedido;
 import net.valorweb.domain.Produto;
 import net.valorweb.domain.enums.EstadoPagamento;
+import net.valorweb.domain.enums.Perfil;
 import net.valorweb.domain.enums.TipoCliente;
 import net.valorweb.repositories.CategoriaRepository;
 import net.valorweb.repositories.CidadeRepository;
@@ -60,7 +61,7 @@ public class DBService {
 
 	@Autowired
 	ItemPedidoRepository itemPedidoRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -122,16 +123,24 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-		Cliente cli1 = new Cliente("Maria Silva", "fsouzamg@hotmail.com", "01234567891", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("123"));
+		Cliente cli1 = new Cliente("Maria Silva", "fsouzamg@hotmail.com", "01234567891", TipoCliente.PESSOAFISICA,
+				bCryptPasswordEncoder.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("31999117612", "3130786214"));
+
+		Cliente cli2 = new Cliente("Felipe Santos", "fsantosmg@gmail.com", "48152407011", TipoCliente.PESSOAFISICA,
+				bCryptPasswordEncoder.encode("123"));
+		cli2.addPerfil(Perfil.ADMIN);
+		cli2.getTelefones().addAll(Arrays.asList("3199117614"));
 
 		Endereco e1 = new Endereco("Rua Flores", "300", "Apto 303", "Jardim", "38220834", cli1, c1);
 		Endereco e2 = new Endereco("Av. Matos", "105", "Sala 800", "Centro", "38777012", cli1, c2);
+		Endereco e3 = new Endereco("Av. Contorno", "9545", "Sala 31", "Prado", "30411105", cli2, c2);
 
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
-
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Pedido ped1 = new Pedido(sdf.parse("30/09/2017 10:32"), cli1, e1);
