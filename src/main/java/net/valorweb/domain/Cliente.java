@@ -30,13 +30,14 @@ import net.valorweb.domain.enums.TipoCliente;
 @EqualsAndHashCode(of = "id")
 public class Cliente implements Serializable {
 
-	public Cliente(String nome, String email, String cpfCnpj, TipoCliente tipo) {
+	public Cliente(String nome, String email, String cpfCnpj, TipoCliente tipo, String senha) {
 		super();
 
 		this.nome = nome;
 		this.email = email;
 		this.cpfCnpj = cpfCnpj;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
+		this.senha = senha;
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -53,7 +54,7 @@ public class Cliente implements Serializable {
 
 	@Getter
 	@Setter
-	@Column(unique=true)
+	@Column(unique = true)
 	private String email;
 
 	@Getter
@@ -61,6 +62,11 @@ public class Cliente implements Serializable {
 	private String cpfCnpj;
 
 	private Integer tipo;
+
+	@Getter
+	@Setter
+	@JsonIgnore
+	private String senha;
 
 	public TipoCliente getTipo() {
 		return TipoCliente.toEnum(tipo);
