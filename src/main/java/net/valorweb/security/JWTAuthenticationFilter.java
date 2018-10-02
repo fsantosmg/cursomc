@@ -1,4 +1,4 @@
-package net.valorweb;
+package net.valorweb.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,8 +19,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import net.valorweb.dto.CredenciaisDTO;
-import net.valorweb.security.JWTUtil;
-import net.valorweb.security.UserSecurity;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authenticationManager;
