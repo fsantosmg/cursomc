@@ -4,9 +4,14 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.valorweb.domain.Categoria;
+import net.valorweb.domain.Cliente;
 import net.valorweb.domain.ItemPedido;
 import net.valorweb.domain.PagamentoComBoleto;
 import net.valorweb.domain.Pedido;
@@ -14,6 +19,8 @@ import net.valorweb.domain.enums.EstadoPagamento;
 import net.valorweb.repositories.ItemPedidoRepository;
 import net.valorweb.repositories.PagamentoRepository;
 import net.valorweb.repositories.PedidoRepository;
+import net.valorweb.security.UserSecurity;
+import net.valorweb.services.exception.AuthorizationExeption;
 import net.valorweb.services.exception.ObjectNotFoundException;
 
 @Service
@@ -72,6 +79,20 @@ public class PedidoService {
 		
 		emailService.sendOrderConfirmationHtmlEmail(pedido);
 		return pedido;
+	}
+	
+	
+	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		
+		UserSecurity user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationExeption("Acesso negado");
+		}
+		Cliente cliente = clienteService.find(user.getId());
+
+		return repository.findByCliente(cliente, PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy));
+		
+
 	}
 
 
