@@ -16,12 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.valorweb.domain.Cliente;
 import net.valorweb.domain.Endereco;
+import net.valorweb.domain.enums.Perfil;
 import net.valorweb.domain.enums.TipoCliente;
 import net.valorweb.dto.ClienteDTO;
 import net.valorweb.dto.ClienteNewDTO;
 import net.valorweb.repositories.CidadeRepository;
 import net.valorweb.repositories.ClienteRepository;
 import net.valorweb.repositories.EnderecoRepository;
+import net.valorweb.security.UserSecurity;
+import net.valorweb.services.exception.AuthorizationExeption;
 import net.valorweb.services.exception.DataIntegrityException;
 import net.valorweb.services.exception.ObjectNotFoundException;
 
@@ -41,6 +44,13 @@ public class ClienteService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public Cliente findById(Integer id) {
+		
+		UserSecurity user = UserService.authenticated();
+		
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationExeption("Acesso negado!");
+		}
+		
 		Optional<Cliente> cliente = repository.findById(id);
 		return cliente.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
