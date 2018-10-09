@@ -120,5 +120,17 @@ public class ClienteService {
 		cli.getTelefones().addAll(clienteDTO.getTelefones());
 		return cli;
 	}
+	
+	public Cliente findByEmail(String email) {
+		
+		return repository.findByEmail(email);
+		
+	}
+
+	public void save(Cliente cliente) {
+		
+		repository.save(cliente);
+		
+	}
 
 }
