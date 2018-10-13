@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import net.valorweb.domain.Cliente;
@@ -25,13 +26,16 @@ import net.valorweb.domain.Cliente;
 import net.valorweb.dto.ClienteDTO;
 import net.valorweb.dto.ClienteNewDTO;
 import net.valorweb.services.ClienteService;
+import net.valorweb.services.S3Service;
 
 @RestController
 @RequestMapping(value = "clientes")
 public class ClienteResource {
 
 	@Autowired
-	ClienteService service;
+	private ClienteService service;
+	
+
 
 	@GetMapping
 	public ResponseEntity<List<Cliente>> listAll() {
@@ -93,6 +97,15 @@ public class ClienteResource {
 
 		return ResponseEntity.ok().body(listDto);
 
+	}
+	
+
+	@PostMapping(value="/picture")
+	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file) {
+
+		URI uri =  service.uploadProfilePicture(file);
+		
+		return ResponseEntity.created(uri).build();
 	}
 
 }
