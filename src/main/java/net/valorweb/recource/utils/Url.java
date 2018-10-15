@@ -1,4 +1,4 @@
-package net.valorweb.recources.utils;
+package net.valorweb.recource.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;

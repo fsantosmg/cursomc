@@ -1,4 +1,4 @@
-package net.valorweb.recources;
+package net.valorweb.recource;
 
 import java.net.URI;
 

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.HandlerMapping;
 
 import net.valorweb.domain.Cliente;
 import net.valorweb.dto.ClienteDTO;
-import net.valorweb.recources.exceptions.FieldMessage;
+import net.valorweb.recource.exceptions.FieldMessage;
 import net.valorweb.repositories.ClienteRepository;
 
 public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, ClienteDTO> {

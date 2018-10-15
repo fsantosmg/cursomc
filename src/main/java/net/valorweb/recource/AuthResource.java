@@ -1,4 +1,4 @@
-package net.valorweb.recources;
+package net.valorweb.recource;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;

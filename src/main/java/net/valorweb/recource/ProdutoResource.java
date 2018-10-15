@@ -1,4 +1,4 @@
-package net.valorweb.recources;
+package net.valorweb.recource;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import net.valorweb.domain.Pedido;
 import net.valorweb.domain.Produto;
 import net.valorweb.dto.CategoriaDTO;
 import net.valorweb.dto.ProdutoDTO;
-import net.valorweb.recources.utils.Url;
+import net.valorweb.recource.utils.Url;
 import net.valorweb.services.ProdutoService;
 
 @RestController

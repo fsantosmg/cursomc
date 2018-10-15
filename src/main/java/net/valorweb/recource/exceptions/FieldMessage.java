@@ -1,4 +1,4 @@
-package net.valorweb.recources.exceptions;
+package net.valorweb.recource.exceptions;
 
 import java.io.Serializable;
 

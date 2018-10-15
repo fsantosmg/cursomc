@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import net.valorweb.domain.Cliente;
 import net.valorweb.domain.enums.TipoCliente;
 import net.valorweb.dto.ClienteNewDTO;
-import net.valorweb.recources.exceptions.FieldMessage;
+import net.valorweb.recource.exceptions.FieldMessage;
 import net.valorweb.repositories.ClienteRepository;
 import net.valorweb.services.validation.utils.CpfCnpj;
 

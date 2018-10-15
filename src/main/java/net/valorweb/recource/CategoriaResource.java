@@ -1,7 +1,8 @@
-package net.valorweb.recources;
+package net.valorweb.recource;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,64 +19,64 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import net.valorweb.domain.Cliente;
-import net.valorweb.domain.Cliente;
-import net.valorweb.dto.ClienteDTO;
-import net.valorweb.dto.ClienteNewDTO;
-import net.valorweb.services.ClienteService;
-import net.valorweb.services.S3Service;
+import net.valorweb.domain.Categoria;
+import net.valorweb.dto.CategoriaDTO;
+import net.valorweb.services.CategoriaService;
 
 @RestController
-@RequestMapping(value = "clientes")
-public class ClienteResource {
+@RequestMapping(value = "categorias")
+public class CategoriaResource {
 
 	@Autowired
-	private ClienteService service;
-	
-
+	CategoriaService service;
 
 	@GetMapping
-	public ResponseEntity<List<Cliente>> listAll() {
+	public ResponseEntity<List<CategoriaDTO>> listAll() {
 
-		return ResponseEntity.ok().body(service.findAll());
+		List<Categoria> list = service.findAll();
+
+		List<CategoriaDTO> listDto = list.stream().map(categoria -> new CategoriaDTO(categoria))
+				.collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listDto);
 
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Cliente> findPorId(@PathVariable Integer id) {
+	public ResponseEntity<Categoria> findById(@PathVariable Integer id) {
 
-		return ResponseEntity.ok().body(service.findById(id));
+		return ResponseEntity.ok().body(service.find(id));
 
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO clienteDTO) {
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO) {
 
-		Cliente cliente = service.fromDTO(clienteDTO);
+		Categoria categoria = service.fromDTO(categoriaDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(service.insert(cliente).getId()).toUri();
+				.buildAndExpand(service.insert(categoria).getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
-
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO clienteDTO, @PathVariable Integer id) {
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO categoriaDTO, @PathVariable Integer id) {
 
-		Cliente cliente = service.fromDTO(clienteDTO);
+		Categoria categoria = service.fromDTO(categoriaDTO);
+		
+		categoria.setId(id);
 
-		cliente.setId(id);
-
-		cliente = service.update(cliente);
+		categoria = service.update(categoria);
 
 		return ResponseEntity.noContent().build();
 
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 
 		service.delete(id);
@@ -84,28 +85,18 @@ public class ClienteResource {
 
 	}
 
-	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/page")
-	public ResponseEntity<Page<ClienteDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
+	public ResponseEntity<Page<CategoriaDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 
-		Page<Cliente> list = service.findPage(page, linesPerPage, orderBy, direction);
+		Page<Categoria> list = service.findPage(page, linesPerPage, orderBy, direction);
 
-		Page<ClienteDTO> listDto = list.map(cliente -> new ClienteDTO(cliente));
+		Page<CategoriaDTO> listDto = list.map(categoria -> new CategoriaDTO(categoria));
 
 		return ResponseEntity.ok().body(listDto);
 
-	}
-	
-
-	@PostMapping(value="/picture")
-	public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name="file") MultipartFile file) {
-
-		URI uri =  service.uploadProfilePicture(file);
-		
-		return ResponseEntity.created(uri).build();
 	}
 
 }
