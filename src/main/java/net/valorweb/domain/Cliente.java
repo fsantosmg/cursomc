@@ -30,10 +30,7 @@ import net.valorweb.domain.enums.TipoCliente;
 @EqualsAndHashCode(of = "id")
 public class Cliente implements Serializable {
 	
-	
-	@Getter
-	@Setter
-	private String imageUrl;
+
 	
 	public Cliente() {
 		addPerfil(Perfil.CLIENTE);

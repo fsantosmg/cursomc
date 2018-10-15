@@ -16,7 +16,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
-import net.valorweb.services.exception.FileExeption;
+import net.valorweb.services.exception.FileException;
 
 @Service
 public class S3Service {
@@ -57,7 +57,7 @@ public class S3Service {
 
 		} catch (URISyntaxException e) {
 
-			throw new FileExeption("Erro ao converter URL para URI");
+			throw new FileException("Erro ao converter URL para URI");
 		}
 	}
 

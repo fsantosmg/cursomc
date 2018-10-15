@@ -1,17 +1,17 @@
 package net.valorweb.services.exception;
 
-public class FileExeption extends RuntimeException {
+public class FileException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public FileExeption(String msg) {
+	public FileException(String msg) {
 		super(msg);
 	}
 
-	public FileExeption(String msg, Throwable cause) {
+	public FileException(String msg, Throwable cause) {
 
 		super(msg, cause);
 	}

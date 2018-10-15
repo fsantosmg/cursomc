@@ -15,7 +15,7 @@ import com.amazonaws.services.s3.model.AmazonS3Exception;
 
 import net.valorweb.services.exception.AuthorizationExeption;
 import net.valorweb.services.exception.DataIntegrityException;
-import net.valorweb.services.exception.FileExeption;
+import net.valorweb.services.exception.FileException;
 import net.valorweb.services.exception.ObjectNotFoundException;
 
 @ControllerAdvice
@@ -66,8 +66,8 @@ public class ResourceExceptionHandler {
 
 	}
 	
-	@ExceptionHandler(FileExeption.class)
-	public ResponseEntity<StandardError> fileExeption(FileExeption e, HttpServletRequest request) {
+	@ExceptionHandler(FileException.class)
+	public ResponseEntity<StandardError> fileExeption(FileException e, HttpServletRequest request) {
 
 		StandardError err = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
 

@@ -1,5 +1,6 @@
 package net.valorweb.services;
 
+import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +8,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,24 +40,33 @@ public class ClienteService {
 
 	@Autowired
 	private CidadeRepository cidadeRepository;
-	
+
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	@Autowired
 	private S3Service s3Service;
 
+	@Autowired
+	private ImageService imageService;
+	
+	@Value ("${img.prefix.cliente.profile}")
+	private String prefix;
+	
+	@Value("${img.profile.size}")
+	private Integer size;
+
 	public Cliente findById(Integer id) {
-		
+
 		UserSecurity user = UserService.authenticated();
-		
+
 		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
 			throw new AuthorizationExeption("Acesso negado!");
 		}
-		
+
 		Optional<Cliente> cliente = repository.findById(id);
 		return cliente.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
@@ -76,9 +87,9 @@ public class ClienteService {
 	public Cliente insert(Cliente cliente) {
 
 		cliente.setId(null);
-		cliente=repository.save(cliente);
+		cliente = repository.save(cliente);
 		enderecoRepository.saveAll(cliente.getEnderecos());
-		
+
 		return cliente;
 	}
 
@@ -117,7 +128,7 @@ public class ClienteService {
 
 	public Cliente fromDTO(@Valid ClienteNewDTO clienteDTO) {
 		Cliente cli = new Cliente(clienteDTO.getNome(), clienteDTO.getEmail(), clienteDTO.getCpfCnpj(),
-				TipoCliente.toEnum(clienteDTO.getTipo()), bCryptPasswordEncoder.encode(clienteDTO.getSenha()) );
+				TipoCliente.toEnum(clienteDTO.getTipo()), bCryptPasswordEncoder.encode(clienteDTO.getSenha()));
 		Endereco endereco = new Endereco(clienteDTO.getLogradouro(), clienteDTO.getNumero(),
 				clienteDTO.getComplemento(), clienteDTO.getBairro(), clienteDTO.getCep(), cli,
 				cidadeRepository.getOne(clienteDTO.getCidadeId()));
@@ -125,19 +136,19 @@ public class ClienteService {
 		cli.getTelefones().addAll(clienteDTO.getTelefones());
 		return cli;
 	}
-	
+
 	public Cliente findByEmail(String email) {
-		
+
 		return repository.findByEmail(email);
-		
+
 	}
 
 	public void save(Cliente cliente) {
-		
+
 		repository.save(cliente);
-		
+
 	}
-	
+
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
 		
 		UserSecurity user = UserService.authenticated();
@@ -146,16 +157,18 @@ public class ClienteService {
 			throw new AuthorizationExeption("Acesso negado!");
 		}
 		
-		URI uri = s3Service.uploadFile(multipartFile);
-		
-		Cliente cli = find(user.getId());
-		
-		cli.setImageUrl(uri.toString());
-		
-		repository.save(cli);
 		
 		
-		return uri;
+		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+		
+		jpgImage = imageService.cropSquare(jpgImage);
+		jpgImage = imageService.resize(jpgImage, size);
+		
+		
+		String fileName = prefix + user.getId() + ".jpg";
+		
+		return s3Service.uploadFile(imageService.getImputStream(jpgImage, "jpg"), fileName, "image");
+		
 	}
 
 }
