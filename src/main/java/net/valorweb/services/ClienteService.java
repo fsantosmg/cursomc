@@ -76,6 +76,8 @@ public class ClienteService {
 
 		return repository.findAll();
 	}
+	
+
 
 	public Cliente find(Integer id) {
 		Optional<Cliente> cliente = repository.findById(id);
@@ -138,8 +140,18 @@ public class ClienteService {
 	}
 
 	public Cliente findByEmail(String email) {
+		
+		UserSecurity user = UserService.authenticated();
 
-		return repository.findByEmail(email);
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+			throw new AuthorizationExeption("Acesso negado!");
+		}
+		Cliente cliente = repository.findByEmail(email);
+		if (cliente == null) {
+			throw new ObjectNotFoundException("Email não encontrado! Id: " + user.getId() + ", Tipo: " + Cliente.class.getName());
+		}
+
+		return cliente;
 
 	}
 
@@ -170,5 +182,7 @@ public class ClienteService {
 		return s3Service.uploadFile(imageService.getImputStream(jpgImage, "jpg"), fileName, "image");
 		
 	}
+	
+	
 
 }
