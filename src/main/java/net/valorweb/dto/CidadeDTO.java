@@ -4,22 +4,21 @@ import java.io.Serializable;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.valorweb.domain.Estado;
+import net.valorweb.domain.Cidade;
 
 @Data
 @NoArgsConstructor
-public class EstadoDTO implements Serializable {
+public class CidadeDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public EstadoDTO(Estado estado) {
-		id = estado.getId();
-		nome = estado.getNome();
-	}
-	
 	private Integer id;
-	
 	private String nome;
+	
+	public CidadeDTO(Cidade cidade) {
+		this.id = cidade.getId();
+		this.nome = cidade.getNome();
+	}
 	
 	
 
