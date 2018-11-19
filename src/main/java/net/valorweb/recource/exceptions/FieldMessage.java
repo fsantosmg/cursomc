@@ -13,21 +13,21 @@ public class FieldMessage implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FieldMessage(String fildName, String message) {
+	public FieldMessage(String fieldName, String message) {
 		super();
-		this.fildName = fildName;
+		this.fieldName = fieldName;
 		this.message = message;
 	}
 
-	private String fildName;
+	private String fieldName;
 	private String message;
 
 	public String getFildName() {
-		return fildName;
+		return fieldName;
 	}
 
 	public void setFildName(String fildName) {
-		this.fildName = fildName;
+		this.fieldName = fildName;
 	}
 
 	public String getMessage() {

@@ -52,10 +52,10 @@ public class ClienteService {
 
 	@Autowired
 	private ImageService imageService;
-	
-	@Value ("${img.prefix.cliente.profile}")
+
+	@Value("${img.prefix.cliente.profile}")
 	private String prefix;
-	
+
 	@Value("${img.profile.size}")
 	private Integer size;
 
@@ -76,8 +76,6 @@ public class ClienteService {
 
 		return repository.findAll();
 	}
-	
-
 
 	public Cliente find(Integer id) {
 		Optional<Cliente> cliente = repository.findById(id);
@@ -135,12 +133,18 @@ public class ClienteService {
 				clienteDTO.getComplemento(), clienteDTO.getBairro(), clienteDTO.getCep(), cli,
 				cidadeRepository.getOne(clienteDTO.getCidadeId()));
 		cli.getEnderecos().add(endereco);
-		cli.getTelefones().addAll(clienteDTO.getTelefones());
+		cli.getTelefones().add(clienteDTO.getTelefone1());
+		if (clienteDTO.getTelefone2() != null) {
+			cli.getTelefones().add(clienteDTO.getTelefone2());
+		}
+		if (clienteDTO.getTelefone3() != null) {
+			cli.getTelefones().add(clienteDTO.getTelefone3());
+		}
 		return cli;
 	}
 
 	public Cliente findByEmail(String email) {
-		
+
 		UserSecurity user = UserService.authenticated();
 
 		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
@@ -148,7 +152,8 @@ public class ClienteService {
 		}
 		Cliente cliente = repository.findByEmail(email);
 		if (cliente == null) {
-			throw new ObjectNotFoundException("Email não encontrado! Id: " + user.getId() + ", Tipo: " + Cliente.class.getName());
+			throw new ObjectNotFoundException(
+					"Email não encontrado! Id: " + user.getId() + ", Tipo: " + Cliente.class.getName());
 		}
 
 		return cliente;
@@ -162,27 +167,22 @@ public class ClienteService {
 	}
 
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
-		
+
 		UserSecurity user = UserService.authenticated();
-		
-		if (user == null ) {
+
+		if (user == null) {
 			throw new AuthorizationExeption("Acesso negado!");
 		}
-		
-		
-		
+
 		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
-		
+
 		jpgImage = imageService.cropSquare(jpgImage);
 		jpgImage = imageService.resize(jpgImage, size);
-		
-		
+
 		String fileName = prefix + user.getId() + ".jpg";
-		
+
 		return s3Service.uploadFile(imageService.getImputStream(jpgImage, "jpg"), fileName, "image");
-		
+
 	}
-	
-	
 
 }

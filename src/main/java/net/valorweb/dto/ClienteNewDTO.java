@@ -1,23 +1,19 @@
 package net.valorweb.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import net.valorweb.services.validation.ClienteInsert;
 
 @NoArgsConstructor
-@Getter
-@Setter
 @ClienteInsert
+@Data
 public class ClienteNewDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,9 +29,9 @@ public class ClienteNewDTO implements Serializable {
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String cpfCnpj;
 
-	@NotEmpty
 	private Integer tipo;
-	
+
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String senha;
 
 	@NotEmpty(message="Preenchimento obrigatório")
@@ -55,8 +51,7 @@ public class ClienteNewDTO implements Serializable {
 	private String telefone2;
 	private String telefone3;
 	
-	@NotEmpty(message="Preenchimento obrigatório")
-	private List<String> telefones = new ArrayList<>();
+
 
 	private Integer cidadeId;
 
