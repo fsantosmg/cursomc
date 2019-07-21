@@ -3,247 +3,47 @@
   <ID>JAVA</ID>
   <OriginalElement>net.valorweb.recource</OriginalElement>
   <nodes>
-    <node x="1015.2584010840108" y="1201.0">net.valorweb.domain.ItemPedidoPK</node>
-    <node x="1087.5192605497482" y="771.0">net.valorweb.domain.Categoria</node>
-    <node x="324.75" y="1014.0">net.valorweb.domain.PagamentoComBoleto</node>
-    <node x="1351.39983546264" y="200.0">net.valorweb.domain.Cidade</node>
-    <node x="1369.445005807201" y="477.0">net.valorweb.domain.Estado</node>
-    <node x="5.75" y="1036.0">net.valorweb.recource.utils.Url</node>
-    <node x="1174.4588946960898" y="1036.0">net.valorweb.recource.CategoriaResource</node>
-    <node x="804.4285714285714" y="422.0">net.valorweb.domain.Endereco</node>
-    <node x="222.15333914053417" y="211.0">net.valorweb.domain.enums.EstadoPagamento</node>
-    <node x="713.6285714285714" y="0.0">net.valorweb.domain.enums.TipoCliente</node>
-    <node x="681.6285714285714" y="123.0">net.valorweb.domain.Cliente</node>
-    <node x="937.4588946960898" y="970.0">net.valorweb.domain.Produto</node>
-    <node x="613.091734417344" y="510.0">net.valorweb.recource.ClienteResource</node>
-    <node x="314.09173441734407" y="477.0">net.valorweb.domain.Pagamento</node>
-    <node x="1000.4285714285714" y="433.0">net.valorweb.domain.ItemPedido</node>
-    <node x="91.75" y="1025.0">net.valorweb.domain.PagamentoComCartao</node>
-    <node x="1386.945005807201" y="804.0">net.valorweb.recource.EstadoResource</node>
-    <node x="0.0" y="1223.0">net.valorweb.recource.ProdutoResource</node>
-    <node x="680.2553716608593" y="1036.0">net.valorweb.recource.PedidoResource</node>
-    <node x="686.5109465737513" y="727.0">net.valorweb.domain.Pedido</node>
+    <node x="625.0" y="1035.0">net.valorweb.domain.ItemPedidoPK</node>
+    <node x="1140.0" y="457.0">net.valorweb.domain.Categoria</node>
+    <node x="492.0" y="246.0">net.valorweb.domain.PagamentoComBoleto</node>
+    <node x="0.0" y="794.0">net.valorweb.domain.Estado</node>
+    <node x="264.0" y="794.0">net.valorweb.domain.Cidade</node>
+    <node x="731.0" y="1420.0">net.valorweb.recource.utils.Url</node>
+    <node x="528.0" y="794.0">net.valorweb.recource.CategoriaResource</node>
+    <node x="1008.0" y="0.0">net.valorweb.domain.Endereco</node>
+    <node x="0.0" y="1035.0">net.valorweb.domain.enums.EstadoPagamento</node>
+    <node x="337.0" y="1035.0">net.valorweb.domain.enums.TipoCliente</node>
+    <node x="0.0" y="0.0">net.valorweb.domain.Cliente</node>
+    <node x="252.0" y="457.0">net.valorweb.domain.Produto</node>
+    <node x="516.0" y="457.0">net.valorweb.recource.ClienteResource</node>
+    <node x="335.5" y="0.0">net.valorweb.domain.Pagamento</node>
+    <node x="0.0" y="1420.0">net.valorweb.recource.ProdutoResource</node>
+    <node x="0.0" y="457.0">net.valorweb.domain.ItemPedido</node>
+    <node x="264.0" y="258.0">net.valorweb.domain.PagamentoComCartao</node>
+    <node x="593.0" y="1252.0">net.valorweb.recource.EstadoResource</node>
+    <node x="0.0" y="1252.0">net.valorweb.recource.PedidoResource</node>
+    <node x="733.0" y="0.0">net.valorweb.domain.Pedido</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="net.valorweb.domain.Pedido" target="net.valorweb.domain.Cliente">
-      <point x="-26.111111111111143" y="-91.5" />
-      <point x="777.8998354626401" y="707.0" />
-      <point x="770.591734417344" y="707.0" />
-      <point x="770.591734417344" y="397.0" />
-      <point x="746.4285714285713" y="397.0" />
-      <point x="-43.200000000000045" y="124.5" />
-    </edge>
-    <edge source="net.valorweb.recource.EstadoResource" target="net.valorweb.domain.Estado">
-      <point x="0.0" y="-14.5" />
-      <point x="0.0" y="47.5" />
-    </edge>
-    <edge source="net.valorweb.recource.PedidoResource" target="net.valorweb.domain.Pedido">
-      <point x="0.0" y="-14.5" />
-      <point x="753.7553716608593" y="950.0" />
-      <point x="784.4276132404179" y="950.0" />
-      <point x="-19.583333333333314" y="91.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Pedido" target="net.valorweb.domain.Pagamento">
-      <point x="-104.44444444444446" y="-91.5" />
-      <point x="699.5665021293069" y="707.0" />
-      <point x="493.44887727448696" y="707.0" />
-      <point x="39.85714285714289" y="47.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Produto" target="net.valorweb.domain.Categoria">
-      <point x="54.25" y="-80.5" />
-      <point x="1100.2088946960898" y="950.0" />
-      <point x="1121.0192605497482" y="950.0" />
-      <point x="-67.0" y="47.5" />
-    </edge>
     <edge source="net.valorweb.domain.PagamentoComCartao" target="net.valorweb.domain.Pagamento">
-      <point x="-26.625" y="-25.5" />
-      <point x="171.625" y="950.0" />
-      <point x="187.13235578784338" y="950.0" />
-      <point x="187.13235578784338" y="697.0" />
-      <point x="334.0203058459155" y="697.0" />
-      <point x="-119.57142857142856" y="47.5" />
-    </edge>
-    <edge source="net.valorweb.recource.ClienteResource" target="net.valorweb.domain.Cliente">
-      <point x="0.0" y="-14.5" />
-      <point x="686.591734417344" y="397.0" />
-      <point x="703.2285714285715" y="397.0" />
-      <point x="-86.39999999999998" y="124.5" />
-    </edge>
-    <edge source="net.valorweb.domain.ItemPedidoPK" target="net.valorweb.domain.Pedido">
-      <point x="-44.57142857142861" y="-36.5" />
-      <point x="1048.686972512582" y="1161.0" />
-      <point x="876.9007936507937" y="1161.0" />
-      <point x="876.9007936507937" y="950.0" />
-      <point x="862.7609465737513" y="950.0" />
-      <point x="58.75" y="91.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Pagamento" target="net.valorweb.domain.enums.EstadoPagamento">
-      <point x="0.0" y="-47.5" />
-      <point x="453.59173441734407" y="397.0" />
-      <point x="355.48667247386754" y="397.0" />
-      <point x="53.33333333333334" y="36.5" />
-    </edge>
-    <edge source="net.valorweb.domain.PagamentoComBoleto" target="net.valorweb.domain.enums.EstadoPagamento">
-      <point x="-69.375" y="-36.5" />
-      <point x="347.875" y="930.0" />
-      <point x="289.81650212930674" y="930.0" />
-      <point x="289.81650212930674" y="397.0" />
-      <point x="302.1533391405342" y="397.0" />
-      <point x="0.0" y="36.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Produto" target="net.valorweb.domain.Pedido">
-      <point x="-90.41666666666666" y="-80.5" />
-      <point x="955.5422280294232" y="950.0" />
-      <point x="901.9276132404179" y="950.0" />
-      <point x="97.91666666666663" y="91.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Estado" target="net.valorweb.domain.Cidade">
-      <point x="-45.75" y="-47.5" />
-      <point x="1415.195005807201" y="397.0" />
-      <point x="1421.89983546264" y="397.0" />
-      <point x="0.0" y="47.5" />
-    </edge>
-    <edge source="net.valorweb.domain.PagamentoComCartao" target="net.valorweb.domain.Pedido">
-      <point x="79.875" y="-25.5" />
-      <point x="278.125" y="940.0" />
-      <point x="706.0942799070847" y="940.0" />
-      <point x="-97.91666666666663" y="91.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Produto" target="net.valorweb.domain.ItemPedido">
-      <point x="18.083333333333314" y="-80.5" />
-      <point x="1064.042228029423" y="950.0" />
-      <point x="1057.2275938830817" y="950.0" />
-      <point x="1057.2275938830817" y="707.0" />
-      <point x="1103.095238095238" y="707.0" />
-      <point x="18.666666666666742" y="91.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Cliente" target="net.valorweb.domain.Endereco">
-      <point x="86.39999999999998" y="124.5" />
-      <point x="876.0285714285715" y="397.0" />
-      <point x="892.4285714285714" y="397.0" />
-      <point x="0.0" y="-102.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Pagamento" target="net.valorweb.domain.Pedido">
-      <point x="79.71428571428572" y="47.5" />
-      <point x="533.3060201316298" y="697.0" />
-      <point x="725.6776132404179" y="697.0" />
-      <point x="-78.33333333333337" y="-91.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Pedido" target="net.valorweb.domain.Endereco">
-      <point x="26.111111111111086" y="-91.5" />
-      <point x="830.1220576848624" y="647.0" />
-      <point x="892.4285714285714" y="647.0" />
-      <point x="0.0" y="102.5" />
+      <point x="0.0" y="-37.5" />
+      <point x="368.0" y="221.0" />
+      <point x="407.25" y="221.0" />
+      <point x="-71.75" y="98.0" />
     </edge>
     <edge source="net.valorweb.domain.PagamentoComBoleto" target="net.valorweb.domain.Pagamento">
-      <point x="23.125" y="-36.5" />
-      <point x="439.8165021293068" y="707.0" />
-      <point x="453.59173441734407" y="707.0" />
-      <point x="0.0" y="47.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Endereco" target="net.valorweb.domain.Cidade">
-      <point x="58.66666666666663" y="-102.5" />
-      <point x="951.0952380952381" y="397.0" />
-      <point x="1374.89983546264" y="397.0" />
-      <point x="-47.0" y="47.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Categoria" target="net.valorweb.domain.Produto">
-      <point x="0.0" y="47.5" />
-      <point x="1188.0192605497482" y="950.0" />
-      <point x="1136.3755613627563" y="950.0" />
-      <point x="90.41666666666663" y="-80.5" />
-    </edge>
-    <edge source="net.valorweb.domain.ItemPedido" target="net.valorweb.domain.ItemPedidoPK">
-      <point x="37.33333333333337" y="91.5" />
-      <point x="1121.7619047619048" y="707.0" />
-      <point x="1354.445005807201" y="707.0" />
-      <point x="1354.445005807201" y="1161.0" />
-      <point x="1115.544115369725" y="1161.0" />
-      <point x="22.285714285714278" y="-36.5" />
-    </edge>
-    <edge source="net.valorweb.recource.CategoriaResource" target="net.valorweb.domain.Categoria">
-      <point x="0.0" y="-14.5" />
-      <point x="1256.4588946960898" y="950.0" />
-      <point x="1255.0192605497482" y="950.0" />
-      <point x="67.0" y="47.5" />
-    </edge>
-    <edge source="net.valorweb.domain.ItemPedidoPK" target="net.valorweb.domain.Produto">
-      <point x="0.0" y="-36.5" />
-      <point x="1093.2584010840108" y="1151.0" />
-      <point x="1118.292228029423" y="1151.0" />
-      <point x="72.33333333333331" y="80.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Cliente" target="net.valorweb.domain.Pedido">
-      <point x="0.0" y="124.5" />
-      <point x="789.6285714285714" y="397.0" />
-      <point x="781.591734417344" y="397.0" />
-      <point x="781.591734417344" y="697.0" />
-      <point x="804.0109465737513" y="697.0" />
-      <point x="0.0" y="-91.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Cidade" target="net.valorweb.domain.Estado">
-      <point x="47.0" y="47.5" />
-      <point x="1468.89983546264" y="397.0" />
-      <point x="1506.695005807201" y="397.0" />
-      <point x="45.75" y="-47.5" />
-    </edge>
-    <edge source="net.valorweb.domain.ItemPedido" target="net.valorweb.domain.Pedido">
-      <point x="-37.33333333333334" y="91.5" />
-      <point x="1047.095238095238" y="677.0" />
-      <point x="908.4553910181958" y="677.0" />
-      <point x="104.44444444444446" y="-91.5" />
-    </edge>
-    <edge source="net.valorweb.recource.ProdutoResource" target="net.valorweb.domain.Produto">
-      <point x="38.75" y="-14.5" />
-      <point x="116.25" y="1181.0" />
-      <point x="973.6255613627566" y="1181.0" />
-      <point x="-72.33333333333331" y="80.5" />
-    </edge>
-    <edge source="net.valorweb.recource.ProdutoResource" target="net.valorweb.recource.utils.Url">
-      <point x="-38.75" y="-14.5" />
-      <point x="0.0" y="14.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Cliente" target="net.valorweb.domain.enums.TipoCliente">
-      <point x="0.0" y="-124.5" />
-      <point x="0.0" y="36.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Endereco" target="net.valorweb.domain.Cliente">
-      <point x="-58.66666666666663" y="-102.5" />
-      <point x="43.200000000000045" y="124.5" />
-    </edge>
-    <edge source="net.valorweb.domain.PagamentoComBoleto" target="net.valorweb.domain.Pedido">
-      <point x="69.375" y="-36.5" />
-      <point x="486.625" y="950.0" />
-      <point x="745.2609465737513" y="950.0" />
-      <point x="-58.75" y="91.5" />
-    </edge>
-    <edge source="net.valorweb.domain.Pedido" target="net.valorweb.domain.ItemPedido">
-      <point x="78.33333333333331" y="-91.5" />
-      <point x="882.3442799070847" y="667.0" />
-      <point x="1028.4285714285716" y="667.0" />
-      <point x="-56.0" y="91.5" />
-    </edge>
-    <edge source="net.valorweb.domain.ItemPedido" target="net.valorweb.domain.Produto">
-      <point x="-18.66666666666663" y="91.5" />
-      <point x="1065.7619047619048" y="687.0" />
-      <point x="997.5422280294231" y="687.0" />
-      <point x="997.5422280294231" y="950.0" />
-      <point x="991.7088946960898" y="950.0" />
-      <point x="-54.25" y="-80.5" />
-    </edge>
-    <edge source="net.valorweb.domain.PagamentoComCartao" target="net.valorweb.domain.enums.EstadoPagamento">
-      <point x="-79.875" y="-25.5" />
-      <point x="118.375" y="940.0" />
-      <point x="176.13235578784338" y="940.0" />
-      <point x="176.13235578784338" y="397.0" />
-      <point x="248.8200058072008" y="397.0" />
-      <point x="-53.33333333333337" y="36.5" />
+      <point x="0.0" y="-49.5" />
+      <point x="590.0" y="221.0" />
+      <point x="550.75" y="221.0" />
+      <point x="71.75" y="98.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="892.0" y="437.0" />
+  <settings layout="Hierarchic Group" zoom="0.5847953216374269" x="679.5" y="749.5" />
   <SelectedNodes />
   <Categories>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
     <Category>Properties</Category>
   </Categories>
   <SCOPE>All</SCOPE>
